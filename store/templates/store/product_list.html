@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="listview-title mt-2">Products</div>
+    <ul class="listview image-listview">
+        {% for product in products %}
+            <li>
+                <a href="#" class="item">
+                    <div class="icon-box bg-primary">
+                        <ion-icon name="image-outline"></ion-icon>
+                    </div>
+                    <div class="in">
+                        {{ product.name }}
+                        <span class="badge badge-danger">{{ product.price }}</span>
+                    </div>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

@@ -1,0 +1,30 @@
+version: "3"
+services:
+  db:
+    restart: on-failure:10
+    image: postgres:latest
+    env_file: dev.env
+    ports:
+      - "5433:5432"
+    volumes:
+      - "postgres-db-volume-ms:/var/lib/postgresql/data"
+  nginx:
+    image: nginx:stable
+    volumes:
+      - ./static:/usr/share/nginx/html/static/
+      - ./media:/usr/share/nginx/html/media/
+    ports:
+      - "7072:80"
+    depends_on:
+      - web
+  web:
+    build: .
+    container_name: web
+    command: python manage.py runserver 0.0.0.0:8000
+    env_file: dev.env
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+volumes:
+  postgres-db-volume-ms:
