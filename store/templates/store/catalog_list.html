@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load currency_tag %}
+{% block content %}
+    <div class="listview-title mt-2">Categories</div>
+    <ul class="listview image-listview">
+        {% for catalog in catalogs %}
+            <li>
+                <a href="{% url 'catalog_product_list' catalog.id %}" class="item">
+                    <div class="icon-box bg-primary">
+                        <ion-icon name="image-outline"></ion-icon>
+                    </div>
+                    <div class="in">
+                        {{ catalog.name }}
+                    </div>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock content %}
